@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import EmploymentApp from './EmploymentApp';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <p>Hello world!</p>
-  </React.StrictMode>,
+  <EmploymentApp/>,
   document.getElementById('root')
 );
 
