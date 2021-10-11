@@ -1,9 +1,10 @@
 import React from 'react'
+import  {JobList}  from  '../job/JobList'
 
 export function Home(){
     return(
         <>
-        <h1>Home</h1>
+            <JobList/>
         </>
     )
 }
