@@ -1,9 +1,9 @@
-import { Paper ,Grid, Typography,styled, ButtonBase, Button, Chip  } from '@mui/material'
+import { Paper ,Grid, Typography,styled, ButtonBase, Button, Chip  } from '@material-ui/core'
 import React from 'react'
 import moment from 'moment'
 
 export function JobItem({company,title,date,category,img,typeSchedule}){
-
+    
     const Img = styled('img')({
         margin: 'auto',
         display: 'block',
@@ -19,11 +19,15 @@ export function JobItem({company,title,date,category,img,typeSchedule}){
         <>
         <Paper  sx ={{marginTop: 3, marginLeft : 10, marginRight : 10, p: 3, pr: 4}}>
             <Grid container spacing = {2}>
+                { img && (
                 <Grid item>
                     <ButtonBase  sx={{ width: 128, height: 128 }}>
-                        <Img alt="complex" src ="https://xolutime.com/web-images/icon-xolutech.jpg"/>
+                        <Img alt="complex" src ={img}/>
                     </ButtonBase>
                 </Grid>
+                )                
+                }
+                
                 <Grid item xs = {12} sm container>
                     <Grid item xs container direction ="column" spacing ={1}>
                         <Grid item xs>
@@ -58,9 +62,7 @@ export function JobItem({company,title,date,category,img,typeSchedule}){
                     </Grid>
                 </Grid>
             </Grid>
-        </Paper>
-
-        
+        </Paper>        
         </>
     )
 }

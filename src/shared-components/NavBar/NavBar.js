@@ -1,29 +1,38 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }));
 
 
 export default function NavBar(){
 
+    const classes = useStyles();
+
     return (
-        <Box sx={{ 
-            flexGrow: 1,            
-            }}>
-        <AppBar color ="inherit" elevation={0} position="static">           
+ <div className={classes.root}>
+        <AppBar color ="inherit" elevation={0} position="static" >           
         <Container>
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" className={classes.title}>
                 News
                 </Typography>
                 <Button>Login</Button>
           </Toolbar> 
           </Container>       
         </AppBar>
-      </Box>
+</div>
     )
 }
