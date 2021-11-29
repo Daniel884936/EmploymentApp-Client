@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Paper, Button, Grid,Typography, TextField,Box} from '@material-ui/core';
 import * as yup from 'yup';
 import {useFormik} from 'formik'
@@ -35,7 +35,11 @@ const useStyles = makeStyles((theme) => ({
 export function Register(){    
 
     const currentDate = new Date();
-    const classes = useStyles();      
+    const classes = useStyles();   
+    const [state, setstate] = useState({
+        isLoading: false
+    })
+       
     const formik = useFormik({
         initialValues:{
             name:'',
@@ -51,7 +55,10 @@ export function Register(){
     });
         
     function handleOnSubmit(values){
-                                            
+            setstate({
+                isLoading:true,
+                ...state
+            })                                
             let userFormDate = new FormData();
             userFormDate.append('Name',values.name)
             userFormDate.append('Email',values.email)
@@ -61,6 +68,10 @@ export function Register(){
             userFormDate.append('Bithdate',values.bithdate.toISOString())
             console.log(userFormDate)
             register(userFormDate, (data)=>{
+                setstate({
+                    isLoading:false,
+                    ...state
+                })
          })           
     }      
 
@@ -182,6 +193,7 @@ export function Register(){
 
                 <Grid item>
                         <Button 
+                            disabled = {state.isLoading}
                             color="primary"                            
                             className={classes.button}                            
                             variant="contained" 

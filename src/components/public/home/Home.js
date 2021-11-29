@@ -1,10 +1,10 @@
 import React from 'react'
-import  {Register}  from  '../auth/Register'
+import  {Login}  from  '../auth/Login'
 
 export function Home(){
     return(
         <>
-            <Register/>
+            <Login/>
         </>
     )
 }

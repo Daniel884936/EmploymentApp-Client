@@ -1,12 +1,13 @@
 import axios from 'axios'
 import config from '../config/config.json'
-import {infoDialog,startLoading,stopLoadingDialog, errorFromServerDialog} from '../helpers/dialogs'
+import {fireInfoDialog,startLoading,stopLoadingDialog, fireErrorFromServerDialog} from '../helpers/dialogHelper'
 
 const {SERVER_URL: baseUrl} = config;
 const userUrl = "/User";
+const authenticationUrl = "/Authentication";
 
 export  function register(user, callback){
-    infoDialog('Please wait!','loading');
+    fireInfoDialog('Please wait!','loading');
     startLoading();
     const url = `${baseUrl}${userUrl}`;
     axios.post(url, user,{
@@ -18,8 +19,25 @@ export  function register(user, callback){
         callback(data);
     })
     .catch(error=>{                        
-        errorFromServerDialog('Error', 'Something is wrong', error.response)
+        fireErrorFromServerDialog('Error', 'Something is wrong', error.response)
         console.log(error.response)
         stopLoadingDialog();
+    })     
+}
+
+
+export function login(userLogin,successCallback, errorCallback){
+    fireInfoDialog('Please wait!','loading');
+    startLoading();
+    const url = `${baseUrl}${authenticationUrl}`;
+    axios.post(url, userLogin)
+    .then(data=>{
+        stopLoadingDialog();
+        successCallback(data);
+    })
+    .catch(error=>{                                
+        console.log(error.response)
+        stopLoadingDialog();
+        errorCallback(error);
     })     
 }

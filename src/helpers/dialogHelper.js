@@ -9,7 +9,7 @@ export function startLoading(){
     Swal.showLoading();
 }
 
-export function infoDialog(title, text){
+export function fireInfoDialog(title, text){
     Swal.fire({
         title,
         text,
@@ -18,7 +18,7 @@ export function infoDialog(title, text){
     })        
 }
 
-export function errorDialodg(title, text){
+export function fireErrorDialodg(title, text){
     Swal.fire({
         title,
         text,
@@ -27,7 +27,7 @@ export function errorDialodg(title, text){
     })    
 }
 
-export function errorFromServerDialog(title, text,response){
+export function fireErrorFromServerDialog(title, text,response){
 
     if(response.status === 409){
          Swal.fire({
@@ -38,11 +38,11 @@ export function errorFromServerDialog(title, text,response){
     })
     }
     else{
-        errorDialodg(title, text)
+        fireErrorDialodg(title, text)
     }   
 }
 
-export function successDialog(title, text){
+export function fireSuccessDialog(title, text){
     Swal.fire({
         title,
         text,
