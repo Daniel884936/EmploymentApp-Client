@@ -10,7 +10,7 @@ import { separateByUperCase } from '../../../helpers/stringHelper';
 const validationSchema = yup.object().shape({
     email: yup.string().required().email().min(6).max(50), 
     password: yup.string().required().min(7).max(50),
-    confirmPassword: yup.string().oneOf([yup.ref("password"), null], 'Password must be match')
+    confirmPassword: yup.string().oneOf([yup.ref("password"), null], 'Password must be match').required()
 })
 
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +62,14 @@ export function Login(){
                 isLoading:false,
                 ...state
             })
-        },(data)=>{
-            fireErrorToast("Something is wrong!")
+        },(data)=>{            
+            if(data.status === 404){
+                fireErrorToast('User not found')
+            }            
+
+            if(data.status === 500){
+                fireErrorToast(separateByUperCase(data.data.title))
+            }
             setstate({
                 isLoading:false,
                 ...state

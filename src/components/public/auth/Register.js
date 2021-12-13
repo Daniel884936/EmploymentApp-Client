@@ -8,6 +8,8 @@ import moment from "moment";
 import { makeStyles } from '@material-ui/core/styles';
 import { KeyboardDatePicker  } from "@material-ui/pickers";
 import {register} from '../../../services/authService'
+import { fireErrorToast, fireSuccessToast } from '../../../helpers/toastHelper';
+import { separateByUperCase } from '../../../helpers/stringHelper';
 
 
 const validationSchema = yup.object().shape({
@@ -71,8 +73,17 @@ export function Register(){
                 setstate({
                     isLoading:false,
                     ...state
-                })
-         })           
+                    })
+
+                fireSuccessToast('Registered!')
+            },(data)=>{
+                if(data.status === 409){
+                    fireErrorToast('User already exist')
+                }
+                if(data.status === 500){
+                    fireErrorToast(separateByUperCase(data.data.title))
+                }
+            })           
     }      
 
     return(

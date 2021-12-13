@@ -22,17 +22,17 @@ export default function NavBar(){
     const classes = useStyles();
 
     return (
- <div className={classes.root}>
-        <AppBar color ="inherit" elevation={0} position="static" >           
-        <Container>
-            <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                News
-                </Typography>
-                <Button>Login</Button>
-          </Toolbar> 
-          </Container>       
-        </AppBar>
-</div>
+            <div className={classes.root}>
+                    <AppBar color ="inherit" elevation={0} position="static" >           
+                    <Container>
+                        <Toolbar>
+                            <Typography variant="h6" className={classes.title}>
+                            News
+                            </Typography>
+                            <Button>Login</Button>
+                      </Toolbar> 
+                      </Container>       
+                    </AppBar>
+            </div>
     )
 }

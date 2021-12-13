@@ -1,29 +1,44 @@
-import { Paper ,Grid, Typography,styled, ButtonBase, Button, Chip  } from '@material-ui/core'
+import { Paper ,Grid, Typography,styled, ButtonBase, Button, Chip, Box  } from '@material-ui/core'
 import React from 'react'
 import moment from 'moment'
+import { makeStyles } from '@material-ui/styles'
 
-export function JobItem({company,title,date,category,img,typeSchedule}){
-    
-    const Img = styled('img')({
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-        borderRadius : '100%'
-    })
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    borderRadius : '100%'
+})
+
+const useStyle = makeStyles((theme)=>({
+    date:{
+        marginLeft: 4
+    }, 
+    paper: {
+        padding:'15px'
+    },
+    company:{
+        marginTop:'4px',
+        marginBottom:'4px'
+    }
+}))
+
+export function JobItem({company,title,date,category,img,typeSchedule}){    
 
     const dateFormated = moment(date)
     date = dateFormated.startOf('day').fromNow()
+    const classes = useStyle();
 
     return (
-        <>
-        <Paper  sx ={{marginTop: 3, marginLeft : 10, marginRight : 10, p: 3, pr: 4}}>
+        <Box sx ={{m:4}}>
+        <Paper className ={classes.paper} >
             <Grid container spacing = {2}>
                 { img && (
                 <Grid item>
-                    <ButtonBase  sx={{ width: 128, height: 128 }}>
+                    <Box  sx={{ width: 128, height: 128 }}>
                         <Img alt="complex" src ={img}/>
-                    </ButtonBase>
+                    </Box>
                 </Grid>
                 )                
                 }
@@ -31,21 +46,21 @@ export function JobItem({company,title,date,category,img,typeSchedule}){
                 <Grid item xs = {12} sm container>
                     <Grid item xs container direction ="column" spacing ={1}>
                         <Grid item xs>
-                            <Typography component = "div">
+                            <Typography variant="h6">
                                 {title}
                             </Typography>
-                            <Typography  >
+                            <Typography className={classes.company} >
                                 {company}
                             </Typography>
-                            <Grid container direction ="row" item spacing = {0.5}>
+                            <Grid container direction ="row" item spacing = {1}>
                                 <Grid item >
-                                    <Typography   color ="text.secondary">
+                                    <Typography  color ="primary">
                                         {category}
                                     </Typography>
                                 </Grid>
 
                                 <Grid item  >
-                                    <Typography sx = {{ml: 4}}   color ="text.secondary">
+                                    <Typography className={classes.date} color ="primary">
                                         {date}
                                     </Typography>
                                 </Grid>
@@ -57,12 +72,12 @@ export function JobItem({company,title,date,category,img,typeSchedule}){
                         </Grid>
                     </Grid>
                     <Grid item >
-                        <Chip color="secondary" label={typeSchedule}>                    
+                        <Chip color="primary" label={typeSchedule}>                    
                     </Chip>        
                     </Grid>
                 </Grid>
             </Grid>
         </Paper>        
-        </>
+        </Box>
     )
 }
