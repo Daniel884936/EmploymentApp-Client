@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,9 @@ export default function NavBar(){
                             <Typography variant="h6" className={classes.title}>
                             News
                             </Typography>
-                            <Button>Login</Button>
+                            <Link to="/login">
+                                <Button>Login</Button>
+                            </Link>                            
                       </Toolbar> 
                       </Container>       
                     </AppBar>
