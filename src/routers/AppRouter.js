@@ -14,18 +14,18 @@ import { Register } from '../components/public/auth/Register';
 
 const ROUTES = [
 
-    {path:"/", key:"ROOT",exact:true, component:Home},
+    {path:"/", key:"ROOT",exact:true, component:()=>(<><NavBar/><Container><Home/></Container></>)},
     {
         path:"/login",
         key:"LOGIN",
         exact: true,
-        component:Login
+        component:()=>(<Container><Login/></Container>)
     },
     {
         path:"/register",
         key:"REGISTER",
         exact: true,
-        component:Register
+        component:()=>(<Container><Register/></Container>)
     }
 ]
 
@@ -36,16 +36,14 @@ export function RouteWithSubRoutes(route){
             path={route.path}
             exact ={route.exact}
             render={props => < route.component {...props} routes ={route.routes}/>}
-        />
+            />
     )
 }
 
 export function RenderRoutes({routes}){
     return(
-        <Router>
-        <NavBar/>
-            <Box sx ={{marginTop: 3}}>
-                <Container>
+        <Router>        
+            <Box sx ={{marginTop: 3}}>            
                     <Switch>
                         {
                             routes.map((route)=>{
@@ -53,8 +51,7 @@ export function RenderRoutes({routes}){
                             })
                         }
                         <Route component={()=><h1>Not Foount!</h1>}/>
-                    </Switch>
-                </Container>
+                    </Switch>                
             </Box>
     </Router>
     )    
